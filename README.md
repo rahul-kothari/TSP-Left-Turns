@@ -15,10 +15,7 @@ https://docs.google.com/document/d/19NkntFg3GFvIwB5UZ0RwT5NCb02tXNOGPbTSoCklO38/
 ```
 git clone https://github.com/rahul-kothari/TSP-Left-Turns.git
 ```
-You might get access denied errors - in that case try:
-```
-git clone https://<YourGitHubUsername>:<YourGithubPassword>@github.com/rahul-kothari/TSP-Left-Turns.git
-```
+You might get access denied errors - in that case try: `git clone https://<YourGitHubUsername>:<YourGithubPassword>@github.com/rahul-kothari/TSP-Left-Turns.git`
 
 * Create python virtual environment
 ```
