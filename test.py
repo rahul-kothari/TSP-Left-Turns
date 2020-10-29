@@ -17,3 +17,9 @@ starting_node_id = nodes[0][0]
 destination_node_id = nodes[-1][0]
 route = ox.distance.shortest_path(G, starting_node_id, destination_node_id, weight = 'length')
 ox.plot.plot_graph_route(G, route)
+
+
+#print(starting_node_id)
+geoTest = ox.geometries.geometries_from_point((G.nodes[destination_node_id]['y'], G.nodes[destination_node_id]['x']), {'highway':True, 'footway':True, 'pedestrian':True}, dist = 500)
+print(geoTest)
+ox.plot.plot_footprints(geoTest)
