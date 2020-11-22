@@ -3,6 +3,11 @@
 Project Scope (rough guidance)
 https://docs.google.com/document/d/19NkntFg3GFvIwB5UZ0RwT5NCb02tXNOGPbTSoCklO38/edit?usp=sharing
 
+## Code files
+`dijkstra_shortest_path.py` -> carries out dijkstra algorithm b\w 2 nodes given osm graph G
+
+`reduce_graph_for_tsp.py` -> given a list of nodes, does dijkstra for each pair and returns adjacent matrix.
+
 ## Setup
 ### Prerequisites
 * Python - 3.6 or greater
