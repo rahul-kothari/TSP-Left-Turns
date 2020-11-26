@@ -86,7 +86,7 @@ def dijkstra(G: nx.MultiDiGraph, src_id, target_id, avoid_right_turn=False):
 	path = path[::-1]
 	return path, round(distance,2)
 
-if __name__=="main":
+if __name__=="__main__":
 	import osmnx as ox
 
 	G = ox.graph.graph_from_xml("map-uni.osm", bidirectional=True)

@@ -30,7 +30,7 @@ def reduce_graph(G: nx.MultiDiGraph, node_ids: list):
 
 	return adj_matrix
 
-if __name__ == "main":
+if __name__ == "__main__":
 	import osmnx as ox
 
 	G = ox.graph.graph_from_xml("map-uni.osm", bidirectional=True)
