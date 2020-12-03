@@ -1,9 +1,9 @@
 import osmnx as ox
-from dijkstra_shortest_path import remove_right_turn_edges 
-from dijkstra_shortest_path import dijkstra
+import networkx as nx
+#from dijkstra_shortest_path import remove_right_turn_edges 
 
-def manipulate_graph(factor: int):
-    
+def manipulate_graph(G_new: nx.MultiDiGraph, factor: float, edges: list, no_right_turns: list):
+
     #Value for edge iteration
     i = 0
     
@@ -16,19 +16,23 @@ def manipulate_graph(factor: int):
         #Iterate through edges    
         i = i + 1
         
-    return G_new.edges
+    return G_new
 
+#IGNORE
+"""
 if __name__ == "__main__":
     
-    #Getting map and list of edges
+    
+    Getting map and list of edges
     G_new = ox.graph.graph_from_xml("map-uni.osm", bidirectional=True)
     ox.bearing.add_edge_bearings(G_new)
     edges = list(G_new.edges(data = True))
     no_right_turns = remove_right_turn_edges(edges)
+
     
     #Call edge manipulation method to increase lengths
     #Set factor in method call --> Default = 1 (no change)
     manipulate_graph(1)
-    
+    """
 
     
