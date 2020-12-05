@@ -53,34 +53,38 @@ def dijkstra(G: nx.MultiDiGraph, src_id, target_id, avoid_right_turn=False):
 			# remove all edges that classify as right turn
 			out_edges = remove_right_turn_edges(out_edges)
 
-		weight_to_current_node = shortest_paths[current_node_id][1]
+		distance_to_current_node = shortest_paths[current_node_id][1]
 
 		for edge in out_edges:
 			next_node_id = edge[1]
-			weight = edge[2]['length'] + weight_to_current_node
+			weight = edge[2]['length'] + distance_to_current_node
+			# if node not visited before, add it to list.
 			if next_node_id not in shortest_paths:
 				shortest_paths[next_node_id] = (current_node_id, weight)
 			else:
+    			# only add to shortest_paths if current path to node is lesser weight.
 				current_shortest_weight = shortest_paths[next_node_id][1]
 				if current_shortest_weight > weight:
 					shortest_paths[next_node_id] = (current_node_id, weight)
 		
+		# list of next_nodes
 		next_destinations = {node: shortest_paths[node] for node in shortest_paths if node not in visited}
 		
 		if not next_destinations:
 			# avoiding right turns is not possible.
-			return [], -1 
+			return dijkstra(G, current_node_id, target_id)
+			# return [], -1
 		
-		# next node is the destination with the lowest weight
+		# choose the  node whose weight is the lowest.
 		current_node_id = min(next_destinations, key=lambda k: next_destinations[k][1])
 	
 	# Work back through destinations in shortest path
 	path = []
-	distance = 0
+	distance = shortest_paths[current_node_id][1]
 	while current_node_id is not None:
 		path.append(current_node_id)
 		next_node_id = shortest_paths[current_node_id][0]
-		distance += shortest_paths[current_node_id][1]
+		# distance += shortest_paths[current_node_id][1]
 		current_node_id = next_node_id
 	# Reverse path
 	path = path[::-1]
