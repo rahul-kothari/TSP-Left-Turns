@@ -74,7 +74,6 @@ def dijkstra(G: nx.MultiDiGraph, src_id, target_id, avoid_right_turn=False):
 		if not next_destinations:
 			# avoiding right turns is not possible.
 			return dijkstra(G, current_node_id, target_id)
-			# return [], -1
 		
 		# choose the  node whose weight is the lowest.
 		current_node_id = min(next_destinations, key=lambda k: next_destinations[k][1])
@@ -85,7 +84,6 @@ def dijkstra(G: nx.MultiDiGraph, src_id, target_id, avoid_right_turn=False):
 	while current_node_id is not None:
 		path.append(current_node_id)
 		next_node_id = shortest_paths[current_node_id][0]
-		# distance += shortest_paths[current_node_id][1]
 		current_node_id = next_node_id
 	# Reverse path
 	path = path[::-1]
