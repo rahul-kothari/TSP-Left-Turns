@@ -1,5 +1,6 @@
 import sys
 import networkx as nx
+from manipulate_edges import manipulate_graph
 
 def remove_right_turn_edges(edges: list):
 	"""
@@ -105,5 +106,17 @@ if __name__=="__main__":
 
 	route2, dist = dijkstra(G, starting_node_id, destination_node_id)
 	print("Route according to our dijkstra: \t", route2, "\t dist:", dist)
+    
+    #Edge length manipulation by factor
+edges = list(G.edges(data=True))
+no_right_turns = remove_right_turn_edges(edges)
+    #Factor for weight change
+factor = 0.1
+    #Call manipulate_graph (G: nx.MultiDiGraph, factor: float, edges: list, no_right_turns: list)
+G_altered = manipulate_graph(G, factor, edges, no_right_turns)
 
-	ox.plot.plot_graph_route(G, route2)
+route3, dist = dijkstra(G_altered, starting_node_id, destination_node_id, avoid_right_turn=True)
+print("Route with weights altered by factor ", factor,": \t", route3, "\t dist:", dist)
+
+ox.plot.plot_graph_route(G, route2)
+
