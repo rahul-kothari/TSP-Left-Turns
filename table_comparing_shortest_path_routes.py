@@ -26,8 +26,6 @@ r45_ox = ox.distance.shortest_path(G, n4['osmid'], n5['osmid'], weight = 'length
 
 #OSMNX ROUTE DITANCE
 r12_ox_dist = nx.shortest_path_length(G, n1['osmid'], n2['osmid'], weight = 'length')
-r12_ox_dist = nx.shortest_path_length(G, n1['osmid'], n2['osmid'], weight = 'length')
-r12_ox_dist = nx.shortest_path_length(G, n1['osmid'], n2['osmid'], weight = 'length')
 r13_ox_dist = nx.shortest_path_length(G, n1['osmid'], n3['osmid'], weight = 'length')
 r23_ox_dist = nx.shortest_path_length(G, n2['osmid'], n3['osmid'], weight = 'length')
 r24_ox_dist = nx.shortest_path_length(G, n2['osmid'], n4['osmid'], weight = 'length')

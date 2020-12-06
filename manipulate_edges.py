@@ -2,7 +2,7 @@ import osmnx as ox
 import copy
 
 def manipulate_graph_edges_by_a_factor(G, factor: float):
-    """
+	"""
 	Given a graph, modifies all edge lengths by a factor
 
 	Parameters
@@ -12,7 +12,7 @@ def manipulate_graph_edges_by_a_factor(G, factor: float):
 	Returns
 		new graph.
 	"""
-    # Make a deepcopy to not modify original graph.
+	# Make a deepcopy to not modify original graph.
 	G_new = copy.deepcopy(G)	
 	edges = list(G_new.edges(data=True))
 
