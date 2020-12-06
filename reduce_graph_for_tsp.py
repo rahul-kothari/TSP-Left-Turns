@@ -1,7 +1,7 @@
 import networkx as nx
 from dijkstra_shortest_path import dijkstra
 
-def reduce_graph(G: nx.MultiDiGraph, node_ids: list): 
+def reduce_graph(G: nx.MultiDiGraph, node_ids: list, avoid_right_turns=False): 
 	"""
 	Given a list of nodes, carry out dijkstra for each pair of nodes and return a adjacent matrix. 
 	adj_matrix represents the shortest distance to go from node_ids[i] to node_ids[j].
@@ -11,6 +11,7 @@ def reduce_graph(G: nx.MultiDiGraph, node_ids: list):
 		(imported from osm file with bidirectional=True)
 	node_ids: list
 		list of node ids from osm.
+	avoid_right_turns: boolean
 
 	Returns:
 	adj_matrix: 2D array n*n, n = len of nodes.
@@ -23,10 +24,11 @@ def reduce_graph(G: nx.MultiDiGraph, node_ids: list):
 		for j in range(n):
 			if (i == j):
 				continue
+			print("i and j: ", i, " ", j)
 			starting_node_id = node_ids[i]
 			destination_node_id = node_ids[j]
 
-			adj_matrix[i][j] = dijkstra(G, starting_node_id, destination_node_id)[1]
+			adj_matrix[i][j] = dijkstra(G, starting_node_id, destination_node_id, avoid_right_turns)[1]
 
 	return adj_matrix
 

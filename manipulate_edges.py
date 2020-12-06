@@ -1,38 +1,37 @@
 import osmnx as ox
-import networkx as nx
-#from dijkstra_shortest_path import remove_right_turn_edges 
+import copy
 
-def manipulate_graph(G_new: nx.MultiDiGraph, factor: float, edges: list, no_right_turns: list):
+def manipulate_graph_edges_by_a_factor(G, factor: float):
+    """
+	Given a graph, modifies all edge lengths by a factor
 
-    #Value for edge iteration
-    i = 0
-    
-    #Identify left/straight edge lengths and change by factor 
-    #Not changing right turns by factor
-    for edge in no_right_turns:
-        this_dict = no_right_turns[i][2]
-        this_dict["length"] = (this_dict["length"] * factor)
-        
-        #Iterate through edges    
-        i = i + 1
-        
-    return G_new
+	Parameters
+		G: nx.MultiDiGraph
+		factor: flaot
 
-#IGNORE
-"""
+	Returns
+		new graph.
+	"""
+    # Make a deepcopy to not modify original graph.
+	G_new = copy.deepcopy(G)	
+	edges = list(G_new.edges(data=True))
+
+	# modify edge lenght. In python, this changes the value in the list and also in the G_new.
+	for edge in edges:
+		edge[2]['length'] = edge[2]['length']*factor
+		
+	return G_new
+
 if __name__ == "__main__":
     
-    
-    Getting map and list of edges
-    G_new = ox.graph.graph_from_xml("map-uni.osm", bidirectional=True)
-    ox.bearing.add_edge_bearings(G_new)
-    edges = list(G_new.edges(data = True))
-    no_right_turns = remove_right_turn_edges(edges)
+	G = ox.graph.graph_from_xml("map-uni.osm", bidirectional=True)
+	old_edges = list(G.edges(data=True))
+	
+	factor = 0.1
+	G_altered = manipulate_graph(G, factor)
+	altered_edges = list(G_altered.edges(data=True))
 
-    
-    #Call edge manipulation method to increase lengths
-    #Set factor in method call --> Default = 1 (no change)
-    manipulate_graph(1)
-    """
-
-    
+	for i in range(0,5):
+		print(old_edges[i])
+		print(altered_edges[i])
+		print()
