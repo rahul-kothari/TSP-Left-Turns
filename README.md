@@ -41,6 +41,7 @@ So follow this script:
 pip install wheel
 pip install pipwin
 pip install numpy
+pip install python-tsp
 
 pipwin install shapely
 pipwin install gdal
