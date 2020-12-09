@@ -1,4 +1,4 @@
-from reduce_graph_for_tsp import reduce_graph
+from reduce_graph_for_tsp import dijkstra_on_all_pair_of_nodes
 import tsp 
 import osmnx as ox
 
@@ -13,7 +13,7 @@ n3 = int(nodes[-5])
 n4 = int(nodes[-1])
 selected_nodes = [n1, n2, n3, n4]
 	
-adj_matrix = reduce_graph(G, selected_nodes)
+adj_matrix, _ = dijkstra_on_all_pair_of_nodes(G, selected_nodes)
 print(adj_matrix)
 
 r = range(len(adj_matrix))

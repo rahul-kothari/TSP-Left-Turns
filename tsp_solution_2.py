@@ -1,7 +1,6 @@
 from reduce_graph_for_tsp import dijkstra_on_all_pair_of_nodes
 import osmnx as ox
 import numpy as np
-from tsp_solver.greedy import solve_tsp
 from dijkstra_shortest_path import dijkstra
 from python_tsp.heuristics import solve_tsp_local_search
 from python_tsp.heuristics import solve_tsp_simulated_annealing
@@ -9,28 +8,9 @@ from python_tsp.heuristics import solve_tsp_simulated_annealing
 def tsp_node_list(path_list, node_ids):
     loop_list = []
     for i in range(0,len(path_list)):
-        if path_list[i] == 0:
-            loop_list.append(node_ids[0])
-        elif path_list[i] == 1:
-            loop_list.append(node_ids[1])
-        elif path_list[i] == 2:
-            loop_list.append(node_ids[2])
-        elif path_list[i] == 3:
-            loop_list.append(node_ids[3])
-        elif path_list[i] == 4:
-            loop_list.append(node_ids[4])
+        loop_list.append(node_ids[path_list[i]])
     
-    return(loop_list)
-
-"""
-
-[EMPTY...][PATH 1-0][PATH 2-0][PATH 3-0][PATH 4-0]
-[PATH 0-1][EMPTY...][PATH 2-1][PATH 3-1][PATH 4-1]
-[PATH 0-2][PATH 1-2][EMPTY...][PATH 3-2][PATH 4-2]
-[PATH 0-3][PATH 1-3][PATH 2-3][EMPTY...][PATH 4-3]
-[PATH 0-4][PATH 1-4][PATH 2-4][PATH 3-4][EMPTY...]
-
-"""
+    return loop_list
 
 def show_full_path(path, route_matrix, Graph):
     loop_list = []
@@ -58,19 +38,14 @@ if __name__ == "__main__":
     n5 = int(nodes[6])
     selected_nodes = [n1, n2, n3, n4, n5]
 
-    result_matrix = dijkstra_on_all_pair_of_nodes(G, selected_nodes)
-    adj_matrix = result_matrix[0]
-    route_matrix = result_matrix[1]
+    adj_matrix,route_matrix  = dijkstra_on_all_pair_of_nodes(G, selected_nodes)
 
     matrix = np.array(adj_matrix)
 
-    solution = solve_tsp_simulated_annealing(matrix)
-
-    path = solution[0]
-    distance = solution[1]
+    path, distance = solve_tsp_simulated_annealing(matrix)
 
     print(path)
     print(distance)
     node_list = tsp_node_list(path, selected_nodes)
     print(node_list)
-    show_full_path(path, route_matrix, G)
+    # show_full_path(path, route_matrix, G)

@@ -15,6 +15,7 @@ def dijkstra_on_all_pair_of_nodes(G: nx.MultiDiGraph, node_ids: list, avoid_righ
 
 	Returns:
 	adj_matrix: 2D array n*n, n = len of nodes.
+	route_matrix: path from point a to point b
 	"""
 	n = len(node_ids)
 	# create a n * n adjacent matrix.
@@ -31,14 +32,13 @@ def dijkstra_on_all_pair_of_nodes(G: nx.MultiDiGraph, node_ids: list, avoid_righ
 
 			if avoid_right_turns:
 				# use custom dijkstra.
-				adj_matrix[i][j] = dijkstra(G, starting_node_id, destination_node_id, avoid_right_turns)[1]
-				route_matrix[i][j] = dijkstra(G, starting_node_id, destination_node_id, avoid_right_turns)[0]
+				route_matrix[i][j], adj_matrix[i][j] = dijkstra(G, starting_node_id, destination_node_id, avoid_right_turns)
 			else:
 				# Use networkX' dijkstra as it is more optimal.
 				adj_matrix[i][j] = round(nx.shortest_path_length(G, starting_node_id, destination_node_id, weight = 'length'), 2)
-				route_matrix[i][j] = nx.dijkstra_path(G, starting_node_id, destination_node_id, weight = 'length') 
+				route_matrix[i][j] = nx.shortest_path(G, starting_node_id, destination_node_id, weight = 'length')
 
-	return [adj_matrix, route_matrix]
+	return adj_matrix, route_matrix
 
 if __name__ == "__main__":
 	import osmnx as ox
@@ -54,7 +54,6 @@ if __name__ == "__main__":
 	n4 = int(nodes[-1])
 	selected_nodes = [n1, n2, n3, n4]
 	
-	adj_matrix = dijkstra_on_all_pair_of_nodes(G, selected_nodes)[0]
-	route_matrix = dijkstra_on_all_pair_of_nodes(G, selected_nodes)[1]
+	adj_matrix, route_matrix = dijkstra_on_all_pair_of_nodes(G, selected_nodes)
 	print(adj_matrix)
 	print(route_matrix)
