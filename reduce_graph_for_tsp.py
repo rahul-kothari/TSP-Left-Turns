@@ -28,7 +28,7 @@ def dijkstra_on_all_pair_of_nodes(G: nx.MultiDiGraph, node_ids: list, avoid_righ
 				continue
 			starting_node_id = node_ids[i]
 			destination_node_id = node_ids[j]
-			print("Calculating shortest path b/w indices ", i ," and ", j)
+			# print("Calculating shortest path b/w indices ", i ," and ", j)
 
 			if avoid_right_turns:
 				# use custom dijkstra.
