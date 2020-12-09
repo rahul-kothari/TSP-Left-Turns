@@ -33,7 +33,7 @@ def get_full_tsp_path(start_node_id:int, dist_matrix:list, route_matrix:list, av
         # start with node 0 which is also the last elemet on parth_idx and go to path_idx[0]. Then path_idx[0] to path_idx[1] and so on...
         from_node_idx = path_idx[i-1]
         to_node_idx = path_idx[i]
-        print("Get path from node", from_node_idx, "to node", to_node_idx, ": ", route_matrix[from_node_idx][to_node_idx])
+        print("Get path from node", from_node_idx, "to node", to_node_idx)#, ": ", route_matrix[from_node_idx][to_node_idx])
         # remove the first element in route as it was the prev to_node
         final_tsp_route.extend(route_matrix[from_node_idx][to_node_idx][1:])
 
