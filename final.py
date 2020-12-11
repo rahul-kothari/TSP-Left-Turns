@@ -41,9 +41,9 @@ G_new = manipulate_graph_edges_by_a_factor(G, factor)
 avoid_right_turns = True
 
 # Step 5: Dijkstra when avoiding right turns
-dist_adj_matrix_after_weight, route_matrix_after_weight = dijkstra_on_all_pair_of_nodes(G_new, node_ids, avoid_right_turns=avoid_right_turns)
+dist_adj_matrix_after_weight, route_matrix_after_weight = dijkstra_on_all_pair_of_nodes(G_new, node_ids, avoid_right_turns)
 prettyPrintMatrix(dist_adj_matrix_after_weight)
 
 # Step 6: TSP on weighted graph when avoiding right turns
-final_tsp_path, _ = get_full_tsp_path(node_ids[0], dist_adj_matrix, route_matrix, avoid_right_turns)
-ox.plot.plot_graph_route(G_new, final_tsp_path)
+final_tsp_path_avoid_right_turns, _ = get_full_tsp_path(node_ids[0], dist_adj_matrix_after_weight, route_matrix_after_weight, avoid_right_turns)
+ox.plot.plot_graph_route(G_new, final_tsp_path_avoid_right_turns)
