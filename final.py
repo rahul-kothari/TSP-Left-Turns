@@ -9,7 +9,7 @@
 import osmnx as ox
 from manipulate_edges import manipulate_graph_edges_by_a_factor
 
-# from tsp import get_full_tsp_path
+from tsp import get_full_tsp_path
 from reduce_graph_for_tsp import dijkstra_on_all_pair_of_nodes
 
 def prettyPrintMatrix(matrix):
