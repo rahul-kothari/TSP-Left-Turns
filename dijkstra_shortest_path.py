@@ -71,13 +71,29 @@ def dijkstra(G: nx.MultiDiGraph, src_id, target_id, avoid_right_turn=False):
 		next_destinations = {node: shortest_paths[node] for node in shortest_paths if node not in visited}
 		
 		if not next_destinations:
-			# avoiding right turns is not possible.
-			return dijkstra(G, current_node_id, target_id)
+			# avoiding right turns is no more possible.
+			# get path to current node.
+			# And find path to target node without any restriction. 
+			# Add them together.
+
+			pathToCurr, distToCurr = create_path(shortest_paths, current_node_id)
+
+			pathToTarget, distToTarget = dijkstra(G, current_node_id, target_id)
+
+			totalPath = pathToCurr + pathToTarget[1:]
+			totalDist = round(distToCurr + distToTarget,2) 
+			return totalPath, totalDist 
 		
 		# choose the  node whose weight is the lowest.
 		current_node_id = min(next_destinations, key=lambda k: next_destinations[k][1])
 	
 	# Work back through destinations in shortest path
+	return create_path(shortest_paths, current_node_id)
+
+def create_path(shortest_paths, current_node_id):
+	"""
+	shortest paths is a dict of nodes whose value is a tuple of (previous node, weight). Create a path from current node to origin.
+	"""
 	path = []
 	distance = shortest_paths[current_node_id][1]
 	while current_node_id is not None:

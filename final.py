@@ -18,6 +18,7 @@ def prettyPrintMatrix(matrix):
 # STEP 1: IMport map and select nodes.
 G = ox.graph_from_place('Liverpool, North West England, England, United Kingdom')
 ox.bearing.add_edge_bearings(G)
+ox.plot.plot_graph(G)
 
 n1 = G.nodes[416913103]
 n2 = G.nodes[338834142]
@@ -32,18 +33,25 @@ dist_adj_matrix, route_matrix = dijkstra_on_all_pair_of_nodes(G, node_ids)
 prettyPrintMatrix(dist_adj_matrix)
  
 #Step 3: TSP
-final_tsp_path, _ = get_full_tsp_path(node_ids[0], dist_adj_matrix, route_matrix)
+final_tsp_path = get_full_tsp_path(node_ids, dist_adj_matrix, route_matrix)
 ox.plot.plot_graph_route(G, final_tsp_path)
 
 # Step 4: Manipulate graph edges:
-factor = 0.5
+print("\nNow when trying to avoid right turns:\n")
+factor = 0.9
 G_new = manipulate_graph_edges_by_a_factor(G, factor)
 avoid_right_turns = True
 
 # Step 5: Dijkstra when avoiding right turns
-dist_adj_matrix_after_weight, route_matrix_after_weight = dijkstra_on_all_pair_of_nodes(G_new, node_ids, avoid_right_turns)
-prettyPrintMatrix(dist_adj_matrix_after_weight)
+# To preload data:
+# uncomment next line and comment all subsequent lines in step 5.
+from data import route_matrix_after_weight, dist_adj_matrix_after_weight
+
+# dist_adj_matrix_after_weight, route_matrix_after_weight = dijkstra_on_all_pair_of_nodes(G_new, node_ids, avoid_right_turns)
+# print("dist_adj_matrix_after_weight = ", dist_adj_matrix_after_weight)
+# print("route_matrix_after_weight = ", route_matrix_after_weight)
 
 # Step 6: TSP on weighted graph when avoiding right turns
-final_tsp_path_avoid_right_turns, _ = get_full_tsp_path(node_ids[0], dist_adj_matrix_after_weight, route_matrix_after_weight, avoid_right_turns)
+final_tsp_path_avoid_right_turns = get_full_tsp_path(node_ids, dist_adj_matrix_after_weight, route_matrix_after_weight, avoid_right_turns)
+
 ox.plot.plot_graph_route(G_new, final_tsp_path_avoid_right_turns)
