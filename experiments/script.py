@@ -1,4 +1,3 @@
-from dump import dist_adj_matrix_10_nodes, dist_adj_matrix_10_nodes_after_weight
 
 def doTsp(dist_adj_matrix):
     import numpy as np
@@ -13,9 +12,11 @@ def doTsp(dist_adj_matrix):
     print("TSP Order of node indices to be traversed: ", path_idx)
     print("Total distance traversed: ", distance)
 
-print("10 nodes - original graph")
-doTsp(dist_adj_matrix_10_nodes)
+from data_manchester import dist_adj_matrix, dist_adj_matrix_after_weight
 
-print("10 nodes - edges reduced by 0.9 graph")
-doTsp(dist_adj_matrix_10_nodes_after_weight)
+print("original graph")
+doTsp(dist_adj_matrix)
+
+print("edges reduced by 0.9 graph")
+doTsp(dist_adj_matrix_after_weight)
     
