@@ -27,10 +27,7 @@ n4 = G.nodes[27207873]
 n5 = G.nodes[60179781]
 
 node_ids = [n1['osmid'], n2['osmid'], n3['osmid'], n4['osmid'], n5['osmid']]
-"""
-# If choosing 10 nodes:
-node_ids = [4970354696, 299318091, 1527511101, 7920174485, 24934369, 2025181550, 6547690048, 27089501, 5576447478, 1677663614]
-"""
+
 # Step 2: Dijkstra
 dist_adj_matrix, route_matrix = dijkstra_on_all_pair_of_nodes(G, node_ids)
 prettyPrintMatrix(dist_adj_matrix)

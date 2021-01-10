@@ -8,11 +8,11 @@ def eachLegInDifferentColour(G, path_idx, route_matrix):
     for i in range(len(path_idx)):
         routes.append(route_matrix[i-1][i])
 
-    colours = ['r', 'g', 'b', 'y', 'c']
+    colours = ['r', 'g', 'b', 'y', 'c'] #, 'm', 'k', 'darkorange', 'turquoise', 'grey']
     ox.plot.plot_graph_routes(G, routes, colours)
 
 
-def fullPathInOneColour(G, selected_node_ids, path_idx, route_matrix)
+def fullPathInOneColour(G, selected_node_ids, path_idx, route_matrix):
     final_tsp_route = [selected_node_ids[path_idx[-1]]] 
 
     for i in range(len(path_idx)):
@@ -27,7 +27,7 @@ def fullPathInOneColour(G, selected_node_ids, path_idx, route_matrix)
     return final_tsp_route
 
 if __name__ == "__main__":
-    from experiments_for_tyler.exp1 import route_matrix_after_weight, dist_adj_matrix_after_weight
+    from experiments.data_algorithm_bottleneck_10_nodes import route_matrix_10_nodes_after_weight
 
     G = ox.graph_from_place('Liverpool, North West England, England, United Kingdom')
     ox.bearing.add_edge_bearings(G)
