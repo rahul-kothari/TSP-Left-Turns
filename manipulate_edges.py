@@ -28,7 +28,7 @@ if __name__ == "__main__":
 	old_edges = list(G.edges(data=True))
 	
 	factor = 0.1
-	G_altered = manipulate_graph(G, factor)
+	G_altered = manipulate_graph_edges_by_a_factor(G, factor)
 	altered_edges = list(G_altered.edges(data=True))
 
 	for i in range(0,5):
