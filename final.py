@@ -33,7 +33,7 @@ dist_adj_matrix, route_matrix = dijkstra_on_all_pair_of_nodes(G, node_ids)
 prettyPrintMatrix(dist_adj_matrix)
  
 #Step 3: TSP
-final_tsp_path = get_full_tsp_path(node_ids, dist_adj_matrix, route_matrix)
+final_tsp_path, _,_ = get_full_tsp_path(node_ids, dist_adj_matrix, route_matrix)
 ox.plot.plot_graph_route(G, final_tsp_path)
 
 # Step 4: Manipulate graph edges:
@@ -52,6 +52,6 @@ from data import route_matrix_after_weight, dist_adj_matrix_after_weight
 # print("route_matrix_after_weight = ", route_matrix_after_weight)
 
 # Step 6: TSP on weighted graph when avoiding right turns
-final_tsp_path_avoid_right_turns = get_full_tsp_path(node_ids, dist_adj_matrix_after_weight, route_matrix_after_weight, avoid_right_turns)
+final_tsp_path_avoid_right_turns, _, _ = get_full_tsp_path(node_ids, dist_adj_matrix_after_weight, route_matrix_after_weight, avoid_right_turns)
 
 ox.plot.plot_graph_route(G_new, final_tsp_path_avoid_right_turns)

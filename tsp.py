@@ -15,6 +15,8 @@ def tsp_node_list(path_of_nodes, node_ids):
 def get_full_tsp_path(selected_node_ids: list, dist_matrix:list, route_matrix:list, avoid_right_turns=False):
     """
     Given an adjacent_matrix showing distance and route to go from each pair of nodes, do TSP and get the total final path.
+
+    Retruns: full tsp path, path_idx, distance
     """
 
     dist_matrix = np.array(dist_matrix)
@@ -37,7 +39,7 @@ def get_full_tsp_path(selected_node_ids: list, dist_matrix:list, route_matrix:li
         # remove the first element in route as it was the prev to_node
         final_tsp_route.extend(route_matrix[from_node_idx][to_node_idx][1:])
 
-    return final_tsp_route
+    return final_tsp_route, path_idx, distance
 
 
 if __name__ == "__main__":
@@ -58,7 +60,7 @@ if __name__ == "__main__":
 
     adj_matrix,route_matrix  = dijkstra_on_all_pair_of_nodes(G, selected_nodes)
 
-    final_path = get_full_tsp_path(selected_nodes, adj_matrix, route_matrix)
+    final_path, _, _ = get_full_tsp_path(selected_nodes, adj_matrix, route_matrix)
     print(final_path)
 
     ox.plot.plot_graph_route(G, final_path)
