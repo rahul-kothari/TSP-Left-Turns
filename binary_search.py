@@ -11,7 +11,9 @@ def binary_search(optimal_distance, current_distance):
     # Tolerate a difference of 1% between optimal distance and current_distance.
     abs_tol = 0.01 * optimal_distance
     
-    while(True):
+    while(start <= end):
+        
+        #fraction = start + (end - start) // 2
         
         current_distance = current_distance * fraction
         print("curr_dist=", current_distance, "\tfrac=", fraction)
@@ -19,18 +21,19 @@ def binary_search(optimal_distance, current_distance):
         if (math.isclose(optimal_distance, current_distance, abs_tol=abs_tol) == True):
             break;
             
-        elif  (optimal_distance > current_distance):
+        elif  (optimal_distance < current_distance):
             # TODO: There is a bug here - you are setting fraction, but not "start" or "end" values. So it screws up. Try a test run with the values 44474.86 and 52982.41 to know what I mean.
-
-
-
-
+            
             #Reduce fraction
             fraction = start + (fraction / 2)
+
         
         else:
+
+
             #Increase fraction
             fraction = end + (fraction / 2)
+            
     
     return fraction
 
@@ -38,7 +41,7 @@ def binary_search(optimal_distance, current_distance):
 if __name__ == "__main__":
 
     binary_search(44474.86, 52982.41)
-    """
+    
     import osmnx as ox
     from reduce_graph_for_tsp import dijkstra_on_all_pair_of_nodes
     from tsp import get_full_tsp_path    
@@ -73,4 +76,3 @@ if __name__ == "__main__":
     # Step 7: binary search on required edge factor for dist_traversed_no_constraints == dist_traversed_avoid_bad_turn 
     edge_factor = binary_search(dist_traversed_no_constraints, dist_traversed_avoid_bad_turn)
     print("Fraction: ", edge_factor)
-    """

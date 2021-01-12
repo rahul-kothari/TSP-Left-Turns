@@ -38,7 +38,7 @@ ox.plot.plot_graph_route(G, final_tsp_path)
 
 # Step 4: Manipulate graph edges:
 print("\nNow when trying to avoid right turns:\n")
-factor = 0.9
+factor = 0.76
 G_new = manipulate_graph_edges_by_a_factor(G, factor)
 avoid_right_turns = True
 
