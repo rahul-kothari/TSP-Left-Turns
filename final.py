@@ -45,11 +45,11 @@ avoid_right_turns = True
 # Step 5: Dijkstra when avoiding right turns
 # To preload data:
 # uncomment next line and comment all subsequent lines in step 5.
-from data import route_matrix_after_weight, dist_adj_matrix_after_weight
+# from data import route_matrix_after_weight, dist_adj_matrix_after_weight
 
-# dist_adj_matrix_after_weight, route_matrix_after_weight = dijkstra_on_all_pair_of_nodes(G_new, node_ids, avoid_right_turns)
-# print("dist_adj_matrix_after_weight = ", dist_adj_matrix_after_weight)
-# print("route_matrix_after_weight = ", route_matrix_after_weight)
+dist_adj_matrix_after_weight, route_matrix_after_weight = dijkstra_on_all_pair_of_nodes(G_new, node_ids, avoid_right_turns)
+print("dist_adj_matrix_after_weight = ", dist_adj_matrix_after_weight)
+print("route_matrix_after_weight = ", route_matrix_after_weight)
 
 # Step 6: TSP on weighted graph when avoiding right turns
 final_tsp_path_avoid_right_turns, _, _ = get_full_tsp_path(node_ids, dist_adj_matrix_after_weight, route_matrix_after_weight, avoid_right_turns)
